@@ -1,0 +1,70 @@
+[
+  {
+    "id": "1",
+    "title": "Complete Flutter Development Course",
+    "description": "Learn Flutter from scratch to advanced level. Build beautiful, fast, and native mobile apps for iOS and Android using Flutter and Dart.",
+    "instructor": "John Doe",
+    "rating": 4.8,
+    "totalHours": 40,
+    "totalLessons": 120,
+    "price": 99.99,
+    "imageUrl": "assets/images/course1.jpg",
+    "categories": ["Mobile Development", "Flutter"],
+    "lessons": [
+      {
+        "id": "1",
+        "title": "Introduction to Flutter",
+        "description": "Getting started with Flutter development",
+        "duration": 30,
+        "videoUrl": "assets/videos/lesson1.mp4",
+        "status": 0
+      },
+      {
+        "id": "2",
+        "title": "Dart Programming Basics",
+        "description": "Learn the fundamentals of Dart programming",
+        "duration": 45,
+        "videoUrl": "assets/videos/lesson2.mp4",
+        "status": 0
+      },
+      {
+        "id": "3",
+        "title": "Building Your First App",
+        "description": "Create your first Flutter application",
+        "duration": 60,
+        "videoUrl": "assets/videos/lesson3.mp4",
+        "status": 0
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "UI/UX Design Fundamentals",
+    "description": "Master the art of user interface and user experience design. Learn design principles, tools, and best practices.",
+    "instructor": "Jane Smith",
+    "rating": 4.9,
+    "totalHours": 25,
+    "totalLessons": 80,
+    "price": 79.99,
+    "imageUrl": "assets/images/course2.jpg",
+    "categories": ["Design", "UI/UX"],
+    "lessons": [
+      {
+        "id": "1",
+        "title": "Design Principles",
+        "description": "Understanding core design principles",
+        "duration": 25,
+        "videoUrl": "assets/videos/lesson1.mp4",
+        "status": 0
+      },
+      {
+        "id": "2",
+        "title": "Color Theory",
+        "description": "Learn about colors in design",
+        "duration": 30,
+        "videoUrl": "assets/videos/lesson2.mp4",
+        "status": 0
+      }
+    ]
+  }
+]
