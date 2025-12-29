@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:convert';
 import 'screens/splash_screen.dart';
 import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
@@ -30,25 +32,42 @@ class MyApp extends StatelessWidget {
         title: 'SpaceLearn',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: const Color(0xFF1E3A8A),
-          scaffoldBackgroundColor: const Color(0xFFF8F9FA),
+          useMaterial3: true,
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xFF3E5C6E),
+            onPrimary: Colors.white,
+            secondary: Color(0xFFA8C686),
+            onSecondary: Colors.black,
+            tertiary: Color(0xFFF2B705),
+            onTertiary: Colors.black,
+            error: Colors.red,
+            onError: Colors.white,
+            surface: Color(0xFFFFFFFF),
+            onSurface: Colors.black,
+          ),
+          scaffoldBackgroundColor: const Color(0xFFFFFFFF),
           fontFamily: GoogleFonts.poppins().fontFamily,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1E3A8A),
+              backgroundColor: const Color(0xFFA8C686),
+              foregroundColor: Colors.black,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(25),
               ),
+              padding: const EdgeInsets.symmetric(vertical: 16),
             ),
           ),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(25),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF1E3A8A), width: 2),
+              borderRadius: BorderRadius.circular(25),
+              borderSide: const BorderSide(color: Color(0xFF3E5C6E), width: 2),
             ),
+            filled: true,
+            fillColor: Colors.grey.shade50,
           ),
         ),
         initialRoute: '/splash',
@@ -74,9 +93,15 @@ class MyApp extends StatelessWidget {
 class AppState extends ChangeNotifier {
   User? _currentUser;
   List<Course> _courses = [];
+  final List<Course> _cart = [];
+  final List<Course> _purchasedCourses = [];
+  final List<Course> _wishlist = [];
 
   User? get currentUser => _currentUser;
   List<Course> get courses => _courses;
+  List<Course> get cart => _cart;
+  List<Course> get purchasedCourses => _purchasedCourses;
+  List<Course> get wishlist => _wishlist;
 
   void setUser(User user) {
     _currentUser = user;
@@ -88,8 +113,58 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> loadCourses() async {
+    try {
+      final String jsonString = await rootBundle.loadString('assets/data/courses.json');
+      final List<dynamic> jsonList = json.decode(jsonString);
+      _courses = jsonList.map((json) => Course.fromJson(json)).toList();
+      notifyListeners();
+    } catch (e) {
+      // Handle error
+      debugPrint('Error loading courses: $e');
+    }
+  }
+
+  void addToCart(Course course) {
+    if (!_cart.contains(course)) {
+      _cart.add(course);
+      notifyListeners();
+    }
+  }
+
+  void removeFromCart(Course course) {
+    _cart.remove(course);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
+  }
+
+  void addToWishlist(Course course) {
+    if (!_wishlist.contains(course)) {
+      _wishlist.add(course);
+      notifyListeners();
+    }
+  }
+
+  void removeFromWishlist(Course course) {
+    _wishlist.remove(course);
+    notifyListeners();
+  }
+
+  void purchaseCourses() {
+    _purchasedCourses.addAll(_cart);
+    _cart.clear();
+    notifyListeners();
+  }
+
   void logout() {
     _currentUser = null;
+    _cart.clear();
+    _purchasedCourses.clear();
+    _wishlist.clear();
     notifyListeners();
   }
 }

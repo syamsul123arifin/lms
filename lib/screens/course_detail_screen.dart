@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../main.dart';
 import '../models/course.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/lesson_tile.dart';
@@ -11,12 +13,15 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+    return Consumer<AppState>(
+      builder: (context, appState, child) {
+        bool isInCart = appState.cart.contains(course);
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
             // Course Image Header
             Stack(
               children: [
@@ -60,10 +65,10 @@ class CourseDetailScreen extends StatelessWidget {
                   // Rating and Hours
                   Row(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 20),
+                      const Icon(Icons.star, color: Color(0xFFF2B705), size: 20),
                       const SizedBox(width: 4),
                       Text(
-                        course.rating.toString(),
+                        '⭐ ${course.rating}',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -74,7 +79,7 @@ class CourseDetailScreen extends StatelessWidget {
                       const Icon(Icons.access_time, color: Colors.black54, size: 20),
                       const SizedBox(width: 4),
                       Text(
-                        '${course.totalHours}h • ${course.totalLessons} lessons',
+                        '${course.totalHours} Hours',
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           color: Colors.black54,
@@ -85,11 +90,11 @@ class CourseDetailScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   // Price
                   Text(
-                    '\$${course.price.toStringAsFixed(0)}',
+                    'Rp. ${course.price.toStringAsFixed(0)}',
                     style: GoogleFonts.poppins(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF1E3A8A),
+                      color: const Color(0xFFA8C686),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -173,16 +178,56 @@ class CourseDetailScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomButton(
-                          text: 'Add to Cart',
-                          onPressed: () {},
+                          text: isInCart ? 'Remove from Chart' : 'Add to Chart',
+                          onPressed: () {
+                            if (isInCart) {
+                              appState.removeFromCart(course);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Removed from chart')),
+                              );
+                            } else {
+                              appState.addToCart(course);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Added to chart')),
+                              );
+                            }
+                          },
                           backgroundColor: Colors.white,
-                          textColor: const Color(0xFF1E3A8A),
+                          textColor: const Color(0xFF3E5C6E),
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      const SizedBox(width: 8),
+                      IconButton(
+                        onPressed: () {
+                          if (appState.wishlist.contains(course)) {
+                            appState.removeFromWishlist(course);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Removed from wishlist')),
+                            );
+                          } else {
+                            appState.addToWishlist(course);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Added to wishlist')),
+                            );
+                          }
+                        },
+                        icon: Icon(
+                          appState.wishlist.contains(course)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: appState.wishlist.contains(course)
+                              ? Colors.red
+                              : Colors.grey,
+                        ),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.all(12),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: CustomButton(
-                          text: 'Buy Now',
+                          text: 'Pay',
                           onPressed: () {
                             Navigator.pushNamed(context, '/payment');
                           },
@@ -196,6 +241,8 @@ class CourseDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+      },
     );
   }
 }

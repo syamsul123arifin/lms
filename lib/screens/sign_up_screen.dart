@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../widgets/custom_button.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -42,61 +41,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 24),
+                // Illustration
+                Center(
+                  child: Image.asset(
+                    'assets/images/learning_illustration.png',
+                    height: 150,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                const SizedBox(height: 32),
                 Text(
-                  'Create Account',
+                  'Sign Up',
                   style: GoogleFonts.poppins(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: const Color(0xFF3E5C6E),
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Join SpaceLearn and start your learning journey',
+                  'Create your account to start learning',
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     color: Colors.black54,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
-                // Name Field
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Full Name',
-                    prefixIcon: const Icon(Icons.person),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 24),
                 // Email Field
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email',
-                    prefixIcon: const Icon(Icons.email),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    prefixIcon: Icon(Icons.email),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -108,17 +96,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
+                // Name Field
+                TextFormField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nama Lengkap',
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your full name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
                 // Password Field
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    prefixIcon: Icon(Icons.lock),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -130,17 +130,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 // Confirm Password Field
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Confirm Password',
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    prefixIcon: Icon(Icons.lock_outline),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -161,7 +158,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onChanged: (value) {
                         setState(() => _agreeToTerms = value ?? false);
                       },
-                      activeColor: const Color(0xFF1E3A8A),
+                      activeColor: const Color(0xFFA8C686),
                     ),
                     Expanded(
                       child: Text(
@@ -175,11 +172,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
                 const SizedBox(height: 32),
-                // Sign Up Button
-                CustomButton(
-                  text: 'Create Account',
-                  onPressed: _signUp,
-                  isLoading: _isLoading,
+                // Register Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _signUp,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFA8C686),
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: _isLoading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            'REGISTER',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 // Sign In Link
@@ -197,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Text(
                         'Sign In',
                         style: GoogleFonts.poppins(
-                          color: const Color(0xFF1E3A8A),
+                          color: const Color(0xFF3E5C6E),
                           fontWeight: FontWeight.w600,
                         ),
                       ),

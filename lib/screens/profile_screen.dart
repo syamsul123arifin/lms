@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'wishlist_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -99,16 +100,28 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   _buildMenuItem(
-                    icon: Icons.book,
-                    title: 'My Courses',
-                    onTap: () {},
-                  ),
-                  const Divider(height: 1),
-                  _buildMenuItem(
-                    icon: Icons.favorite,
-                    title: 'Wishlist',
-                    onTap: () {},
-                  ),
+                     icon: Icons.book,
+                     title: 'My Courses',
+                     onTap: () {
+                       // Navigate to home screen and switch to My Courses tab
+                       Navigator.pushReplacementNamed(context, '/home');
+                       // Note: This would need to be handled differently in a real app
+                       // For now, we'll just navigate to home
+                     },
+                   ),
+                   const Divider(height: 1),
+                   _buildMenuItem(
+                     icon: Icons.favorite,
+                     title: 'Wishlist',
+                     onTap: () {
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                           builder: (context) => const WishlistScreen(),
+                         ),
+                       );
+                     },
+                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
                     icon: Icons.download,
@@ -119,19 +132,96 @@ class ProfileScreen extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.settings,
                     title: 'Settings',
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Settings',
+                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                leading: const Icon(Icons.notifications),
+                                title: Text('Notifications', style: GoogleFonts.poppins()),
+                                trailing: Switch(value: true, onChanged: (value) {}),
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.language),
+                                title: Text('Language', style: GoogleFonts.poppins()),
+                                trailing: Text('English', style: GoogleFonts.poppins()),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.dark_mode),
+                                title: Text('Dark Mode', style: GoogleFonts.poppins()),
+                                trailing: Switch(value: false, onChanged: (value) {}),
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Close', style: GoogleFonts.poppins()),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
                     icon: Icons.help,
                     title: 'Help & Support',
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Help & Support',
+                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text(
+                            'For support, please contact us at:\n\nEmail: support@spacelearn.com\nPhone: +1 (555) 123-4567\n\nWe\'re here to help!',
+                            style: GoogleFonts.poppins(),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Close', style: GoogleFonts.poppins()),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
                     icon: Icons.info,
                     title: 'About',
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'About SpaceLearn',
+                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text(
+                            'SpaceLearn v1.0.0\n\nLearn anywhere, anytime with our comprehensive online learning platform.\n\n© 2024 SpaceLearn Inc.',
+                            style: GoogleFonts.poppins(),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Close', style: GoogleFonts.poppins()),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

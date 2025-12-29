@@ -46,7 +46,7 @@ class _LessonScreenState extends State<LessonScreen> {
               height: 200,
               decoration: BoxDecoration(
                 color: Colors.black,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(25),
               ),
               child: Stack(
                 alignment: Alignment.center,
@@ -93,9 +93,9 @@ class _LessonScreenState extends State<LessonScreen> {
                         widthFactor: _progress,
                         child: Container(
                           decoration: const BoxDecoration(
-                            color: Color(0xFF1E3A8A),
+                            color: Color(0xFFA8C686),
                             borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(12),
+                              bottomLeft: Radius.circular(25),
                             ),
                           ),
                         ),
@@ -184,7 +184,7 @@ class _LessonScreenState extends State<LessonScreen> {
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF1E3A8A),
+                          color: const Color(0xFFA8C686),
                         ),
                       ),
                     ],
@@ -194,7 +194,7 @@ class _LessonScreenState extends State<LessonScreen> {
                     value: _progress,
                     backgroundColor: Colors.grey.shade200,
                     valueColor: const AlwaysStoppedAnimation<Color>(
-                      Color(0xFF1E3A8A),
+                      Color(0xFFA8C686),
                     ),
                   ),
                 ],
@@ -214,29 +214,63 @@ class _LessonScreenState extends State<LessonScreen> {
             // Dummy lessons for demonstration
             LessonTile(
               lesson: widget.lesson,
-              onTap: () {},
+              onTap: () {
+                // Already on this lesson
+              },
             ),
             LessonTile(
               lesson: Lesson(
                 id: '2',
-                title: 'Tools Setup',
-                description: 'Setting up development environment',
+                title: 'Tools Web Developer',
+                description: 'Essential tools for web development',
                 duration: 15,
                 videoUrl: '',
                 status: LessonStatus.notStarted,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LessonScreen(
+                      lesson: Lesson(
+                        id: '2',
+                        title: 'Tools Web Developer',
+                        description: 'Essential tools for web development',
+                        duration: 15,
+                        videoUrl: '',
+                        status: LessonStatus.notStarted,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
             LessonTile(
               lesson: Lesson(
                 id: '3',
-                title: 'Installation Guide',
-                description: 'Installing necessary software',
+                title: 'Installation',
+                description: 'Installing development tools',
                 duration: 20,
                 videoUrl: '',
                 status: LessonStatus.notStarted,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LessonScreen(
+                      lesson: Lesson(
+                        id: '3',
+                        title: 'Installation',
+                        description: 'Installing development tools',
+                        duration: 20,
+                        videoUrl: '',
+                        status: LessonStatus.notStarted,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

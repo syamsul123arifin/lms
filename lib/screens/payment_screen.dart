@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../main.dart';
 import '../widgets/custom_button.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -20,6 +22,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _startTimer();
   }
 
+  @override
+  void dispose() {
+    // Cancel any ongoing timers
+    super.dispose();
+  }
+
   void _updateTime() {
     int minutes = _remainingTime ~/ 60;
     int seconds = _remainingTime % 60;
@@ -28,7 +36,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _startTimer() {
     Future.delayed(const Duration(seconds: 1), () {
-      if (_remainingTime > 0) {
+      if (mounted && _remainingTime > 0) {
         setState(() {
           _remainingTime--;
           _updateTime();
@@ -40,29 +48,32 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-        ),
-        title: Text(
-          'Payment',
-          style: GoogleFonts.poppins(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+    return Consumer<AppState>(
+      builder: (context, appState, child) {
+        final totalAmount = appState.cart.fold<double>(0, (sum, course) => sum + course.price);
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+            ),
+            title: Text(
+              'Payment',
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
           ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
             // Countdown Timer
             Container(
               padding: const EdgeInsets.all(20),
@@ -114,11 +125,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '\$99.99',
+                    'Rp. ${totalAmount.toStringAsFixed(0)}',
                     style: GoogleFonts.poppins(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF1E3A8A),
+                      color: const Color(0xFFA8C686),
                     ),
                   ),
                 ],
@@ -155,7 +166,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Bank BCA',
+                        'Bank BRI',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -181,7 +192,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Account Number: 1234567890',
+                    'Account Number: 0987654321',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.black87,
@@ -226,7 +237,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'ATM BCA',
+                    'ATM / Mobile Banking BRI',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -234,11 +245,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  _buildInstructionStep('1. Insert your ATM card'),
+                  _buildInstructionStep('1. Insert your ATM card or open BRI Mobile app'),
                   _buildInstructionStep('2. Select "Transfer"'),
-                  _buildInstructionStep('3. Select "To BCA Account"'),
-                  _buildInstructionStep('4. Enter account number: 1234567890'),
-                  _buildInstructionStep('5. Enter amount: 99900'),
+                  _buildInstructionStep('3. Select "To BRI Account"'),
+                  _buildInstructionStep('4. Enter account number: 0987654321'),
+                  _buildInstructionStep('5. Enter amount: ${totalAmount.toInt()}'),
                   _buildInstructionStep('6. Confirm transaction'),
                 ],
               ),
@@ -249,8 +260,71 @@ class _PaymentScreenState extends State<PaymentScreen> {
               children: [
                 Expanded(
                   child: CustomButton(
-                    text: 'Change Payment Method',
-                    onPressed: () {},
+                    text: 'Ubah Pembayaran',
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Payment Methods',
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              _buildPaymentMethodOption(
+                                icon: Icons.account_balance,
+                                title: 'Bank Transfer',
+                                subtitle: 'BCA, Mandiri, BNI, BRI',
+                                isSelected: true,
+                              ),
+                              const SizedBox(height: 12),
+                              _buildPaymentMethodOption(
+                                icon: Icons.credit_card,
+                                title: 'Credit Card',
+                                subtitle: 'Visa, Mastercard',
+                                isSelected: false,
+                              ),
+                              const SizedBox(height: 12),
+                              _buildPaymentMethodOption(
+                                icon: Icons.phone_android,
+                                title: 'E-Wallet',
+                                subtitle: 'GoPay, OVO, Dana',
+                                isSelected: false,
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text(
+                                'Cancel',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Payment method updated')),
+                                );
+                              },
+                              child: Text(
+                                'Select',
+                                style: GoogleFonts.poppins(
+                                  color: const Color(0xFF1E3A8A),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     backgroundColor: Colors.white,
                     textColor: const Color(0xFF1E3A8A),
                   ),
@@ -258,8 +332,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: CustomButton(
-                    text: 'Payment Done',
+                    text: 'Done',
                     onPressed: () {
+                      // Purchase courses
+                      appState.purchaseCourses();
                       // Show success dialog
                       showDialog(
                         context: context,
@@ -271,7 +347,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             ),
                           ),
                           content: Text(
-                            'Your payment has been processed successfully.',
+                            'Your payment has been processed successfully. You can now access your courses.',
                             style: GoogleFonts.poppins(),
                           ),
                           actions: [
@@ -299,6 +375,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
         ),
       ),
+    );
+      },
     );
   }
 
@@ -331,6 +409,63 @@ class _PaymentScreenState extends State<PaymentScreen> {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPaymentMethodOption({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required bool isSelected,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0xFFE3F2FD) : Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isSelected ? const Color(0xFF1E3A8A) : Colors.grey.shade300,
+          width: isSelected ? 2 : 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? const Color(0xFF1E3A8A) : Colors.grey.shade600,
+            size: 24,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (isSelected)
+            const Icon(
+              Icons.check_circle,
+              color: Color(0xFF1E3A8A),
+              size: 20,
+            ),
         ],
       ),
     );
