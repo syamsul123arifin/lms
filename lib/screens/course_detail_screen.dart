@@ -131,7 +131,7 @@ class CourseDetailScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 24,
-                        backgroundImage: AssetImage('assets/images/instructor.jpg'),
+                        backgroundImage: AssetImage('assets/images/instructor.png'),
                       ),
                       const SizedBox(width: 12),
                       Text(
