@@ -279,7 +279,7 @@ class _LessonScreenState extends State<LessonScreen> {
               lesson: Lesson(
                 id: '3',
                 title: 'Installation',
-                description: 'Installinmp4g development tools',
+                description: 'Installing development tools',
                 duration: 20,
                 videoUrl: 'assets/images/video_placeholder.mp4',
                 status: LessonStatus.notStarted,

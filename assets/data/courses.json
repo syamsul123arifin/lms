@@ -5,8 +5,8 @@
     "description": "Learn Flutter from scratch to advanced level. Build beautiful, fast, and native mobile apps for iOS and Android using Flutter and Dart.",
     "instructor": "John Doe",
     "rating": 4.8,
-    "totalHours": 40,
-    "totalLessons": 120,
+    "totalHours": 9,
+    "totalLessons": 10,
     "price": 99.99,
     "imageUrl": "assets/images/course1.jpg",
     "categories": ["Mobile Development", "Flutter"],
@@ -16,7 +16,7 @@
         "title": "Introduction to Flutter",
         "description": "Getting started with Flutter development",
         "duration": 30,
-        "videoUrl": "assets/videos/lesson1.mp4",
+        "videoUrl": "assets/images/video_placeholder.mp4",
         "status": 0
       },
       {
@@ -24,7 +24,7 @@
         "title": "Dart Programming Basics",
         "description": "Learn the fundamentals of Dart programming",
         "duration": 45,
-        "videoUrl": "assets/videos/lesson2.mp4",
+        "videoUrl": "assets/images/video_placeholder.mp4",
         "status": 0
       },
       {
@@ -32,7 +32,63 @@
         "title": "Building Your First App",
         "description": "Create your first Flutter application",
         "duration": 60,
-        "videoUrl": "assets/videos/lesson3.mp4",
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "4",
+        "title": "Widgets and Layouts",
+        "description": "Understanding Flutter widgets and building layouts",
+        "duration": 50,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "5",
+        "title": "State Management",
+        "description": "Managing state in Flutter applications",
+        "duration": 55,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "6",
+        "title": "Navigation and Routing",
+        "description": "Implementing navigation between screens",
+        "duration": 40,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "7",
+        "title": "Working with APIs",
+        "description": "Fetching data from REST APIs",
+        "duration": 65,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "8",
+        "title": "Local Storage",
+        "description": "Storing data locally using SQLite",
+        "duration": 45,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "9",
+        "title": "Firebase Integration",
+        "description": "Integrating Firebase for authentication and database",
+        "duration": 70,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "10",
+        "title": "Advanced UI Components",
+        "description": "Building complex UI with animations and custom widgets",
+        "duration": 60,
+        "videoUrl": "assets/images/video_placeholder.mp4",
         "status": 0
       }
     ]
@@ -43,8 +99,8 @@
     "description": "Master the art of user interface and user experience design. Learn design principles, tools, and best practices.",
     "instructor": "Jane Smith",
     "rating": 4.9,
-    "totalHours": 25,
-    "totalLessons": 80,
+    "totalHours": 5,
+    "totalLessons": 8,
     "price": 79.99,
     "imageUrl": "assets/images/course2.jpg",
     "categories": ["Design", "UI/UX"],
@@ -54,7 +110,7 @@
         "title": "Design Principles",
         "description": "Understanding core design principles",
         "duration": 25,
-        "videoUrl": "assets/videos/lesson1.mp4",
+        "videoUrl": "assets/images/video_placeholder.mp4",
         "status": 0
       },
       {
@@ -62,7 +118,235 @@
         "title": "Color Theory",
         "description": "Learn about colors in design",
         "duration": 30,
-        "videoUrl": "assets/videos/lesson2.mp4",
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "3",
+        "title": "Typography Fundamentals",
+        "description": "Choosing and using fonts effectively",
+        "duration": 35,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "4",
+        "title": "Layout and Composition",
+        "description": "Arranging elements for visual harmony",
+        "duration": 40,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "5",
+        "title": "User Research Methods",
+        "description": "Understanding user needs and behaviors",
+        "duration": 45,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "6",
+        "title": "Wireframing and Prototyping",
+        "description": "Creating low and high-fidelity designs",
+        "duration": 50,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "7",
+        "title": "Usability Testing",
+        "description": "Evaluating designs with real users",
+        "duration": 40,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "8",
+        "title": "Design Systems",
+        "description": "Building consistent design languages",
+        "duration": 35,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Front End Developer Course",
+    "description": "Master front-end development with HTML, CSS, JavaScript, and modern frameworks. Build responsive and interactive websites.",
+    "instructor": "Alex Johnson",
+    "rating": 4.7,
+    "totalHours": 8,
+    "totalLessons": 10,
+    "price": 89.99,
+    "imageUrl": "assets/images/course1.jpg",
+    "categories": ["Web Development", "Front End Developer"],
+    "lessons": [
+      {
+        "id": "1",
+        "title": "Introduction to Web Development",
+        "description": "Overview of front-end development and web technologies",
+        "duration": 30,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "2",
+        "title": "HTML Fundamentals",
+        "description": "Learn the structure of web pages with HTML",
+        "duration": 45,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "3",
+        "title": "CSS Styling",
+        "description": "Style your websites with CSS",
+        "duration": 50,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "4",
+        "title": "JavaScript Basics",
+        "description": "Add interactivity with JavaScript",
+        "duration": 55,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "5",
+        "title": "Responsive Design",
+        "description": "Make websites work on all devices",
+        "duration": 40,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "6",
+        "title": "Version Control with Git",
+        "description": "Manage code changes with Git",
+        "duration": 35,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "7",
+        "title": "JavaScript Frameworks",
+        "description": "Introduction to React and other frameworks",
+        "duration": 60,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "8",
+        "title": "Building Projects",
+        "description": "Apply knowledge in real projects",
+        "duration": 70,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "9",
+        "title": "Deployment",
+        "description": "Deploy websites to the web",
+        "duration": 45,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "10",
+        "title": "Advanced Topics",
+        "description": "Performance optimization and best practices",
+        "duration": 50,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Digital Marketing Course",
+    "description": "Learn digital marketing strategies including SEO, social media, content marketing, and analytics to grow your online presence.",
+    "instructor": "Sarah Lee",
+    "rating": 4.6,
+    "totalHours": 7,
+    "totalLessons": 9,
+    "price": 79.99,
+    "imageUrl": "assets/images/course2.jpg",
+    "categories": ["Marketing", "Digital Marketing"],
+    "lessons": [
+      {
+        "id": "1",
+        "title": "Introduction to Digital Marketing",
+        "description": "Overview of digital marketing landscape",
+        "duration": 30,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "2",
+        "title": "SEO Fundamentals",
+        "description": "Optimize websites for search engines",
+        "duration": 45,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "3",
+        "title": "Social Media Marketing",
+        "description": "Build presence on social platforms",
+        "duration": 50,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "4",
+        "title": "Content Marketing",
+        "description": "Create valuable content for audiences",
+        "duration": 40,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "5",
+        "title": "Email Marketing",
+        "description": "Effective email campaigns",
+        "duration": 35,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "6",
+        "title": "PPC Advertising",
+        "description": "Pay-per-click advertising strategies",
+        "duration": 55,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "7",
+        "title": "Analytics and Tracking",
+        "description": "Measure marketing performance",
+        "duration": 45,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "8",
+        "title": "Marketing Automation",
+        "description": "Automate marketing processes",
+        "duration": 40,
+        "videoUrl": "assets/images/video_placeholder.mp4",
+        "status": 0
+      },
+      {
+        "id": "9",
+        "title": "Case Studies and Strategy",
+        "description": "Real-world examples and strategic planning",
+        "duration": 50,
+        "videoUrl": "assets/images/video_placeholder.mp4",
         "status": 0
       }
     ]
