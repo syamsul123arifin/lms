@@ -56,7 +56,7 @@ class _LessonScreenState extends State<LessonScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/video_placeholder.jpg'),
+                        image: AssetImage('assets/images/video_placeholder.mp4'),
                         fit: BoxFit.cover,
                       ),
                     ),

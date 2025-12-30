@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Text(
-                              'Alex Johnson',
+                              'Moh Syamsul arifin',
                               style: GoogleFonts.poppins(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         CircleAvatar(
                           radius: 24,
-                          backgroundImage: AssetImage('assets/images/profile.jpg'),
+                          backgroundImage: AssetImage('assets/images/instructor.jpg'),
                         ),
                       ],
                     ),

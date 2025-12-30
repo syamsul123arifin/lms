@@ -50,6 +50,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   'assets/images/learning_illustration.png',
                   height: 200,
                   fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.image_not_supported,
+                    size: 200,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
               const SizedBox(height: 32),

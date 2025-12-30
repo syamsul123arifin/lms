@@ -43,11 +43,11 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/profile.jpg'),
+                    backgroundImage: AssetImage('assets/images/instrukctor.jpg'),
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Alex Johnson',
+                    'Moh Syamsul Arifin',
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'alex.johnson@email.com',
+                    'syamsul@gmail.com',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.black54,
