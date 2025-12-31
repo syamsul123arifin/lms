@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../core/constants.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -69,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Sign In',
+                          AppStrings.signIn,
                           style: GoogleFonts.poppins(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Continue your learning journey',
+                          AppStrings.continueLearningJourney,
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: Colors.white70,
@@ -91,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                            labelText: 'Email',
+                            labelText: AppStrings.email,
                             labelStyle: const TextStyle(color: Colors.white70),
                             prefixIcon: const Icon(Icons.email, color: Colors.white70),
                             border: OutlineInputBorder(
@@ -110,10 +111,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your email';
+                              return AppStrings.pleaseEnterEmail;
                             }
                             if (!value.contains('@')) {
-                              return 'Please enter a valid email';
+                              return AppStrings.pleaseEnterValidEmail;
                             }
                             return null;
                           },
@@ -125,7 +126,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           obscureText: true,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: AppStrings.password,
                             labelStyle: const TextStyle(color: Colors.white70),
                             prefixIcon: const Icon(Icons.lock, color: Colors.white70),
                             border: OutlineInputBorder(
@@ -144,10 +145,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
+                              return AppStrings.pleaseEnterPassword;
                             }
                             if (value.length < 6) {
-                              return 'Password must be at least 6 characters';
+                              return AppStrings.passwordMinLength;
                             }
                             return null;
                           },
@@ -161,7 +162,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               // Handle forgot password
                             },
                             child: Text(
-                              'Forgot Password?',
+                              AppStrings.forgotPassword,
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -186,7 +187,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: _isLoading
                                 ? const CircularProgressIndicator()
                                 : Text(
-                                    'LOGIN',
+                                    AppStrings.login,
                                     style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -207,7 +208,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    'Or login with',
+                    AppStrings.orLoginWith,
                     style: GoogleFonts.poppins(
                       color: Colors.black54,
                       fontSize: 14,
@@ -223,13 +224,13 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 _socialButton(
                   icon: Icons.facebook,
-                  label: 'Facebook',
+                  label: AppStrings.facebook,
                   onPressed: () {},
                 ),
                 const SizedBox(width: 16),
                 _socialButton(
                   icon: Icons.email,
-                  label: 'Email',
+                  label: AppStrings.emailLabel,
                   onPressed: () {},
                 ),
               ],
@@ -240,7 +241,7 @@ class _SignInScreenState extends State<SignInScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Don't have an account? ",
+                  AppStrings.dontHaveAccount,
                   style: GoogleFonts.poppins(color: Colors.black54),
                 ),
                 TextButton(
@@ -248,7 +249,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Navigator.pushNamed(context, '/signup');
                   },
                   child: Text(
-                    'Sign Up',
+                    AppStrings.signUp,
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF3E5C6E),
                       fontWeight: FontWeight.w600,

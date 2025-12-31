@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
+import '../core/constants.dart';
 import '../widgets/course_card.dart';
 import 'profile_screen.dart';
 
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
   String _selectedCategory = 'All';
 
-  final List<String> _categories = ['All', 'Front End Developer', 'Digital Marketing'];
+  final List<String> _categories = [AppStrings.all, AppStrings.frontEndDeveloper, AppStrings.digitalMarketing];
 
   @override
   void initState() {
@@ -68,24 +69,24 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Courses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Chart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+        items: <BottomNavigationBarItem>[
+           BottomNavigationBarItem(
+             icon: Icon(Icons.home),
+             label: AppStrings.home,
+           ),
+           BottomNavigationBarItem(
+             icon: Icon(Icons.book),
+             label: AppStrings.courses,
+           ),
+           BottomNavigationBarItem(
+             icon: Icon(Icons.shopping_cart),
+             label: AppStrings.cart,
+           ),
+           BottomNavigationBarItem(
+             icon: Icon(Icons.person),
+             label: AppStrings.profile,
+           ),
+         ],
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xFF3E5C6E),
         unselectedItemColor: Colors.grey,
@@ -119,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Good Morning,',
+                              AppStrings.goodMorning,
                               style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.black54,
@@ -159,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TextField(
                         controller: _searchController,
                         decoration: InputDecoration(
-                          hintText: 'UI/UX Designer Mastery',
+                          hintText: AppStrings.uiUxDesignerMastery,
                           border: InputBorder.none,
                           icon: Icon(Icons.search, color: const Color(0xFF3E5C6E)),
                           suffixIcon: _searchQuery.isNotEmpty
@@ -177,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 24),
                     // Categories
                     Text(
-                      'Categories',
+                      AppStrings.categories,
                       style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -223,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Popular Courses',
+                          AppStrings.popularCourses,
                           style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -233,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            'See All',
+                            AppStrings.seeAll,
                             style: GoogleFonts.poppins(
                               color: const Color(0xFF3E5C6E),
                               fontWeight: FontWeight.w500,
@@ -267,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   const SizedBox(height: 16),
                                   Text(
-                                    'No courses found',
+                                    AppStrings.noCoursesFound,
                                     style: GoogleFonts.poppins(
                                       fontSize: 18,
                                       color: Colors.grey.shade600,
@@ -275,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'Try adjusting your search or category filter',
+                                    AppStrings.tryAdjustingSearch,
                                     style: GoogleFonts.poppins(
                                       fontSize: 14,
                                       color: Colors.grey.shade500,
@@ -332,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'No courses purchased yet',
+                  AppStrings.noCoursesPurchased,
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     color: Colors.grey.shade600,
@@ -340,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Start learning by purchasing a course',
+                  AppStrings.startLearningByPurchasing,
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     color: Colors.grey.shade500,
@@ -361,7 +362,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   child: Text(
-                    'Browse Courses',
+                    AppStrings.browseCourses,
                     style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -381,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(
-                    'My Courses (${appState.purchasedCourses.length})',
+                    '${AppStrings.myCourses} (${appState.purchasedCourses.length})',
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -453,7 +454,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    '30% Complete',
+                                    '30${AppStrings.percentComplete}',
                                     style: GoogleFonts.poppins(
                                       fontSize: 12,
                                       color: Colors.black54,
@@ -481,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                               ),
                               child: Text(
-                                'Continue',
+                                AppStrings.continueLabel,
                                 style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
@@ -518,7 +519,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Your cart is empty',
+                  AppStrings.yourCartIsEmpty,
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     color: Colors.grey.shade600,
@@ -526,7 +527,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Add some courses to get started',
+                  AppStrings.addSomeCourses,
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     color: Colors.grey.shade500,
@@ -548,7 +549,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Cart (${appState.cart.length})',
+                        '${AppStrings.cart} (${appState.cart.length})',
                         style: GoogleFonts.poppins(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -559,11 +560,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           appState.clearCart();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Cart cleared')),
+                            SnackBar(content: Text(AppStrings.cartCleared)),
                           );
                         },
                         child: Text(
-                          'Clear All',
+                          AppStrings.clearAll,
                           style: GoogleFonts.poppins(
                             color: Colors.red,
                             fontWeight: FontWeight.w500,
@@ -643,7 +644,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () {
                                 appState.removeFromCart(course);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Removed from cart')),
+                                  SnackBar(content: Text(AppStrings.removedFromCart)),
                                 );
                               },
                               icon: const Icon(Icons.delete, color: Colors.red),
@@ -672,7 +673,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Total',
+                            AppStrings.total,
                             style: GoogleFonts.poppins(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -704,7 +705,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           child: Text(
-                            'Checkout',
+                            AppStrings.checkout,
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,

@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'wishlist_screen.dart';
+import '../core/constants.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool notificationsEnabled = true;
+  bool darkModeEnabled = false;
+  String selectedLanguage = 'English';
+
+  final TextEditingController nameController = TextEditingController(text: 'Moh Syamsul Arifin');
+  final TextEditingController emailController = TextEditingController(text: 'syamsul@gmail.com');
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          'Profile',
+          AppStrings.profile,
           style: GoogleFonts.poppins(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -43,11 +63,11 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/instrukctor.png'),
+                    backgroundImage: AssetImage('assets/images/instructor.png'),
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Moh Syamsul Arifin',
+                    nameController.text,
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -56,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'syamsul@gmail.com',
+                    emailController.text,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.black54,
@@ -64,7 +84,58 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Edit Profile',
+                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField(
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  labelText: 'Name',
+                                  labelStyle: GoogleFonts.poppins(),
+                                ),
+                                style: GoogleFonts.poppins(),
+                              ),
+                              const SizedBox(height: 16),
+                              TextField(
+                                controller: emailController,
+                                decoration: InputDecoration(
+                                  labelText: 'Email',
+                                  labelStyle: GoogleFonts.poppins(),
+                                ),
+                                style: GoogleFonts.poppins(),
+                                keyboardType: TextInputType.emailAddress,
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Cancel', style: GoogleFonts.poppins()),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {});
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Profile updated successfully', style: GoogleFonts.poppins()),
+                                  ),
+                                );
+                              },
+                              child: Text('Save', style: GoogleFonts.poppins(fontWeight: FontWeight.w500)),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1E3A8A),
                       shape: RoundedRectangleBorder(
@@ -126,7 +197,27 @@ class ProfileScreen extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.download,
                     title: 'Downloads',
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Downloads',
+                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text(
+                            'No downloads available at the moment.\n\nDownloaded courses will appear here for offline access.',
+                            style: GoogleFonts.poppins(),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Close', style: GoogleFonts.poppins()),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
@@ -135,38 +226,88 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text(
-                            'Settings',
-                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                          ),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ListTile(
-                                leading: const Icon(Icons.notifications),
-                                title: Text('Notifications', style: GoogleFonts.poppins()),
-                                trailing: Switch(value: true, onChanged: (value) {}),
-                              ),
-                              ListTile(
-                                leading: const Icon(Icons.language),
-                                title: Text('Language', style: GoogleFonts.poppins()),
-                                trailing: Text('English', style: GoogleFonts.poppins()),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: const Icon(Icons.dark_mode),
-                                title: Text('Dark Mode', style: GoogleFonts.poppins()),
-                                trailing: Switch(value: false, onChanged: (value) {}),
+                        builder: (context) => StatefulBuilder(
+                          builder: (context, setStateDialog) => AlertDialog(
+                            title: Text(
+                              'Settings',
+                              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  leading: const Icon(Icons.notifications),
+                                  title: Text('Notifications', style: GoogleFonts.poppins()),
+                                  trailing: Switch(
+                                    value: notificationsEnabled,
+                                    onChanged: (value) {
+                                      setStateDialog(() {
+                                        notificationsEnabled = value;
+                                      });
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.language),
+                                  title: Text('Language', style: GoogleFonts.poppins()),
+                                  trailing: Text(selectedLanguage, style: GoogleFonts.poppins()),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text('Select Language', style: GoogleFonts.poppins()),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ListTile(
+                                              title: Text('English', style: GoogleFonts.poppins()),
+                                              onTap: () {
+                                                setStateDialog(() {
+                                                  selectedLanguage = 'English';
+                                                });
+                                                setState(() {});
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            ListTile(
+                                              title: Text('Indonesian', style: GoogleFonts.poppins()),
+                                              onTap: () {
+                                                setStateDialog(() {
+                                                  selectedLanguage = 'Indonesian';
+                                                });
+                                                setState(() {});
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.dark_mode),
+                                  title: Text('Dark Mode', style: GoogleFonts.poppins()),
+                                  trailing: Switch(
+                                    value: darkModeEnabled,
+                                    onChanged: (value) {
+                                      setStateDialog(() {
+                                        darkModeEnabled = value;
+                                      });
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: Text('Close', style: GoogleFonts.poppins()),
                               ),
                             ],
                           ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: Text('Close', style: GoogleFonts.poppins()),
-                            ),
-                          ],
                         ),
                       );
                     },

@@ -56,7 +56,7 @@ class _LessonScreenState extends State<LessonScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         title: Text(
-          'Lesson',
+          'Pelajaran', // Translated to Indonesian
           style: GoogleFonts.poppins(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class _LessonScreenState extends State<LessonScreen> {
             const SizedBox(height: 24),
             // Lesson Description
             Text(
-              'Lesson Description',
+              'Deskripsi Pelajaran',
               style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -176,7 +176,7 @@ class _LessonScreenState extends State<LessonScreen> {
             const SizedBox(height: 24),
             // Progress Indicator
             Text(
-              'Your Progress',
+              'Kemajuan Anda',
               style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -203,7 +203,7 @@ class _LessonScreenState extends State<LessonScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Lesson Progress',
+                        'Kemajuan Pelajaran',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           color: Colors.black87,
@@ -233,7 +233,7 @@ class _LessonScreenState extends State<LessonScreen> {
             const SizedBox(height: 24),
             // Lesson List (simplified)
             Text(
-              'Course Lessons',
+              'Pelajaran Kursus',
               style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../core/constants.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -60,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  'Sign Up',
+                  AppStrings.signUp,
                   style: GoogleFonts.poppins(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -70,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Create your account to start learning',
+                  AppStrings.createAccountToStartLearning,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     color: Colors.black54,
@@ -83,15 +84,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
-                    labelText: 'Email',
+                    labelText: AppStrings.email,
                     prefixIcon: Icon(Icons.email),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return AppStrings.pleaseEnterEmail;
                     }
                     if (!value.contains('@')) {
-                      return 'Please enter a valid email';
+                      return AppStrings.pleaseEnterValidEmail;
                     }
                     return null;
                   },
@@ -101,12 +102,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   controller: _nameController,
                   decoration: const InputDecoration(
-                    labelText: 'Nama Lengkap',
+                    labelText: AppStrings.fullName,
                     prefixIcon: Icon(Icons.person),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
+                      return AppStrings.pleaseEnterFullName;
                     }
                     return null;
                   },
@@ -117,15 +118,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: 'Password',
+                    labelText: AppStrings.password,
                     prefixIcon: Icon(Icons.lock),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
+                      return AppStrings.pleaseEnterPassword;
                     }
                     if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
+                      return AppStrings.passwordMinLength;
                     }
                     return null;
                   },
@@ -136,15 +137,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: _confirmPasswordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: 'Confirm Password',
+                    labelText: AppStrings.confirmPassword,
                     prefixIcon: Icon(Icons.lock_outline),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
+                      return AppStrings.pleaseConfirmPassword;
                     }
                     if (value != _passwordController.text) {
-                      return 'Passwords do not match';
+                      return AppStrings.passwordsDoNotMatch;
                     }
                     return null;
                   },
@@ -162,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        'I agree to the Terms & Conditions and Privacy Policy',
+                        AppStrings.agreeToTerms,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           color: Colors.black54,
@@ -188,12 +189,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: _isLoading
                         ? const CircularProgressIndicator()
                         : Text(
-                            'REGISTER',
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          AppStrings.register,
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -202,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have an account? ',
+                      AppStrings.alreadyHaveAccount,
                       style: GoogleFonts.poppins(color: Colors.black54),
                     ),
                     TextButton(
@@ -210,7 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        'Sign In',
+                        AppStrings.signIn,
                         style: GoogleFonts.poppins(
                           color: const Color(0xFF3E5C6E),
                           fontWeight: FontWeight.w600,
